@@ -11,11 +11,20 @@ router.get("/applications", async (_, res: Response) => {
   res.send({ data: response.data, status: 200 });
 });
 
-router.post("/applications/:uuid/restart", async (req: Request, res: Response) => {
+router.get("/applications/:uuid", async (req: Request, res: Response) => {
   const { uuid } = req.params;
-  const response = await api.post(`/applications/${uuid}/restart`);
+  const response = await api.get(`/applications/${uuid}`);
   res.send({ data: response.data, status: 200 });
 });
+
+router.post(
+  "/applications/:uuid/restart",
+  async (req: Request, res: Response) => {
+    const { uuid } = req.params;
+    const response = await api.post(`/applications/${uuid}/restart`);
+    res.send({ data: response.data, status: 200 });
+  }
+);
 
 router.post("/applications", async (req: Request, res: Response) => {
   const { PROJECT_UUID, SERVER_UUID, GITHUB_APP_UUID, ENVIRONMENT_NAME } =
@@ -45,7 +54,7 @@ router.post("/applications", async (req: Request, res: Response) => {
     const response = await api.post(`/applications/private-github-app`, body);
     res.send({ data: response.data, status: 200 });
   } catch (error) {
-    console.error({ error }, 'CACETE');
+    console.error({ error }, "CACETE");
     res.send({ error, status: 500 });
   }
 });

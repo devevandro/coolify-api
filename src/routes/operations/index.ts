@@ -9,3 +9,8 @@ router.post("/deploy", async (req: Request, res: Response) => {
   const response = await api.post(`/deploy?uuid=${req.query.uuid}`);
   res.send({ data: response.data, status: 200 });
 });
+
+router.get("/deployments", async (req: Request, res: Response) => {
+  const response = await api.get(`/deployments/${req.query.uuid}`);
+  res.send({ data: response.data, status: 200 });
+});
