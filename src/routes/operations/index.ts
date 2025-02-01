@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
 import { CoolifyBaseApi } from "../../base";
-import { ENVIRONMENTS } from "../../constants";
 
 export const router = Router();
 const baseApi = new CoolifyBaseApi();
