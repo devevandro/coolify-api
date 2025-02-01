@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN yarn install --frozen-lockfile && yarn cache clean
+RUN yarn install && yarn cache clean
 
 RUN yarn build
 
