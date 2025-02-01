@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { CoolifyBaseApi } from "../../base";
 import { ENVIRONMENTS } from "../../constants";
+import { parseEnvString } from "../../utils";
 
 export const router = Router();
 const baseApi = new CoolifyBaseApi();
@@ -16,15 +17,6 @@ router.get("/applications/:uuid", async (req: Request, res: Response) => {
   const response = await api.get(`/applications/${uuid}`);
   res.send({ data: response.data, status: 200 });
 });
-
-router.post(
-  "/applications/:uuid/restart",
-  async (req: Request, res: Response) => {
-    const { uuid } = req.params;
-    const response = await api.post(`/applications/${uuid}/restart`);
-    res.send({ data: response.data, status: 200 });
-  }
-);
 
 router.post("/applications", async (req: Request, res: Response) => {
   const { PROJECT_UUID, SERVER_UUID, GITHUB_APP_UUID, ENVIRONMENT_NAME } =
@@ -54,7 +46,26 @@ router.post("/applications", async (req: Request, res: Response) => {
     const response = await api.post(`/applications/private-github-app`, body);
     res.send({ data: response.data, status: 200 });
   } catch (error) {
-    console.error({ error }, "CACETE");
     res.send({ error, status: 500 });
   }
 });
+
+router.patch("/applications/:uuid", async (req: Request, res: Response) => {
+  const { uuid } = req.params;
+  const { envs } = req.body;;
+  const body = {
+    "data": parseEnvString(envs),
+  };
+
+  const response = await api.patch(`/applications/${uuid}/envs/bulk`, body);
+  res.send({ data: response.data, status: 200 });
+});
+
+router.post(
+  "/applications/:uuid/restart",
+  async (req: Request, res: Response) => {
+    const { uuid } = req.params;
+    const response = await api.post(`/applications/${uuid}/restart`);
+    res.send({ data: response.data, status: 200 });
+  }
+);
