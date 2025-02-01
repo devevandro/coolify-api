@@ -11,6 +11,12 @@ router.get("/applications", async (_, res: Response) => {
   res.send({ data: response.data, status: 200 });
 });
 
+router.post("/applications/:uuid/restart", async (req: Request, res: Response) => {
+  const { uuid } = req.params;
+  const response = await api.post(`/applications/${uuid}/restart`);
+  res.send({ data: response.data, status: 200 });
+});
+
 router.post("/applications", async (req: Request, res: Response) => {
   const { PROJECT_UUID, SERVER_UUID, GITHUB_APP_UUID, ENVIRONMENT_NAME } =
     ENVIRONMENTS;
