@@ -48,7 +48,6 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -la .github/scripts
 
       - name: Execute Deploy Script
         uses: actions/github-script@v7
