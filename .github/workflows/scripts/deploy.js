@@ -9,9 +9,9 @@ module.exports = async ({ github, context, core }) => {
     const secrets = core.getState('SECRETS', { required: true });
     console.log('secrets', secrets);
 
-    // if (!coolifyUrl || !coolifyToken || !appId) {
-    //   throw new Error('Missing required environment variables');
-    // }
+    if (!coolifyUrl || !coolifyToken || !appId) {
+      throw new Error('Missing required environment variables');
+    }
 
     const api = axios.create({
       baseURL: coolifyUrl,
@@ -37,7 +37,7 @@ module.exports = async ({ github, context, core }) => {
 
     // 2. Reiniciar a aplicação
     console.log('Restarting application...');
-    const restart = await api.post(`/api/v1/applications/${appId}/restart`);
+    const restart = await api.post(`/applications/${appId}/restart`);
 
     if (restart.status !== 200) {
       throw new Error('Failed to restart application');
