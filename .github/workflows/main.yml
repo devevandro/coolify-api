@@ -38,4 +38,4 @@ jobs:
           COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
           COOLIFY_APP_UUID: ${{ secrets.COOLIFY_APP_UUID }}
-          SECRET: ${{ secrets.COOLIFY_SECRET }}
+          SECRETS: ${{ secrets.COOLIFY_SECRETS }}
