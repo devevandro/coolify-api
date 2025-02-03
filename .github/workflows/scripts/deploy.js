@@ -9,9 +9,9 @@ module.exports = async ({ github, context, core }) => {
     const secrets = core.getState('SECRETS', { required: true });
     console.log('secrets', secrets);
 
-    if (!coolifyUrl || !coolifyToken || !appId) {
-      throw new Error('Missing required environment variables');
-    }
+    // if (!coolifyUrl || !coolifyToken || !appId) {
+    //   throw new Error('Missing required environment variables');
+    // }
 
     const api = axios.create({
       baseURL: coolifyUrl,
