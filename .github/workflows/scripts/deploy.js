@@ -5,7 +5,7 @@ module.exports = async ({ github, context, core }) => {
   try {
     const coolifyUrl = core.getState('COOLIFY_URL', { required: true });
     const coolifyToken = core.getState('COOLIFY_TOKEN', { required: true });
-    const appId = core.getState('APP_UUID', { required: true });
+    const appId = core.getState('COOLIFY_APP_UIID', { required: true });
     const secrets = core.getState('SECRETS', { required: true });
     console.log('secrets', secrets);
 
