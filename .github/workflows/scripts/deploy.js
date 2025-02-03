@@ -13,13 +13,13 @@ module.exports = async ({ github, context, core }) => {
     //   throw new Error('Missing required environment variables');
     // }
 
-    const api = axios.create({
-      baseURL: coolifyUrl,
-      headers: {
-        'Authorization': `Bearer ${coolifyToken}`,
-        'Content-Type': 'application/json'
-      }
-    });
+    // const api = axios.create({
+    //   baseURL: coolifyUrl,
+    //   headers: {
+    //     'Authorization': `Bearer ${coolifyToken}`,
+    //     'Content-Type': 'application/json'
+    //   }
+    // });
 
     // 1. Atualizar as variáveis de ambiente (ENVs)
     console.log('Updating environment variables...');
