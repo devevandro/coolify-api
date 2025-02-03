@@ -2,13 +2,13 @@ name: Coolify Deploy
 
 on:
   push:
-    branches: [stage]
+    branches: [ stage ]
   workflow_dispatch:
     inputs:
       environment:
-        description: "Environment to deploy"
+        description: 'Environment to deploy'
         required: true
-        default: "production"
+        default: 'production'
         type: choice
         options:
           - production
@@ -19,44 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-
+          node-version: '20'
+          
       - name: Install Dependencies
-        run: |
-          npm init -y
-          npm install typescript ts-node @types/node @actions/core @actions/github axios @types/axios
-
-      - name: Create tsconfig.json
-        run: |
-          echo '{
-            "compilerOptions": {
-              "target": "ES2020",
-              "module": "commonjs",
-              "esModuleInterop": true,
-              "skipLibCheck": true,
-              "forceConsistentCasingInFileNames": true,
-              "outDir": "./dist"
-            }
-          }' > tsconfig.json
-
-      # Adicionando um passo de debug para verificar a estrutura
-      - name: Debug Directory
-        run: |
-          pwd
-          ls -la
-
-      - name: Execute Deploy Script
+        run: npm install @actions/core @actions/github axios
+      
+      - name: Deploy to Coolify
         uses: actions/github-script@v7
         with:
           script: |
-            const { script } = require('./.github/workflows/scripts/deploy.ts');
-            await script({github, context, core});
+            const script = require('.github/workflows/scripts/deploy.js')
+            await script({github, context, core})
         env:
           COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
-          APP_UUID: ${{ secrets.APP_UUID }}
-          SECRETS: ${{ secrets.SECRETS }}
+          APP_ID: ${{ secrets.COOLIFY_APP_UIID }}
+          SECRET: ${{ secrets.COOLIFY_SECRET }}
