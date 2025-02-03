@@ -5,13 +5,13 @@ module.exports = async ({ github, context, core }) => {
   try {
     const coolifyUrl = core.getState('COOLIFY_URL', { required: true });
     const coolifyToken = core.getState('COOLIFY_TOKEN', { required: true });
-    const appId = core.getState('COOLIFY_APP_UIID', { required: true });
+    const appId = core.getState('COOLIFY_APP_UUID', { required: true });
     const secrets = core.getState('SECRETS', { required: true });
     console.log('secrets', secrets);
 
-    if (!coolifyUrl || !coolifyToken || !appId) {
-      throw new Error('Missing required environment variables');
-    }
+    // if (!coolifyUrl || !coolifyToken || !appId) {
+    //   throw new Error('Missing required environment variables');
+    // }
 
     const api = axios.create({
       baseURL: coolifyUrl,
