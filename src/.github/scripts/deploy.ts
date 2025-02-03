@@ -10,7 +10,6 @@ export const script = async ({ github, context, core }) => {
 
     console.log('secrets', secrets);
     console.log('coolifyUrl', coolifyUrl);
-    console.log('coolifyToken', coolifyToken);
 
     if (!coolifyUrl || !coolifyToken || !appUiid) {
       throw new Error("Missing environment variables");
