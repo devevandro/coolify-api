@@ -52,9 +52,9 @@ router.post("/applications", async (req: Request, res: Response) => {
 
 router.patch("/applications/:uuid", async (req: Request, res: Response) => {
   const { uuid } = req.params;
-  const { envs } = req.body;;
+  const { envs } = req.body;
   const body = {
-    "data": parseEnvString(envs),
+    data: parseEnvString(envs),
   };
 
   const response = await api.patch(`/applications/${uuid}/envs/bulk`, body);
