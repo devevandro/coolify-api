@@ -52,5 +52,5 @@ jobs:
         env:
           COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
-          APP_UUID: ${{ secrets.APP_UUID }}
+          APP_UUID: ${{ secrets.COOLIFY_APP_UUID }}
           SECRETS: ${{ secrets.SECRETS }}
