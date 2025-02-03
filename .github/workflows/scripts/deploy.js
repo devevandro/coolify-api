@@ -3,15 +3,15 @@ const core = require('@actions/core');
 
 module.exports = async ({ github, context, core }) => {
   try {
-    const coolifyUrl = process.env.COOLIFY_URL;
-    const coolifyToken = process.env.COOLIFY_TOKEN;
-    const appId = process.env.APP_UUID;
-    const secrets = process.env.SECRETS;
+    // const coolifyUrl = process.env.COOLIFY_URL;
+    // const coolifyToken = process.env.COOLIFY_TOKEN;
+    // const appId = process.env.APP_UUID;
+    const secrets = core.getInput('secrets', { required: true });
     console.log('secrets', secrets);
 
-    if (!coolifyUrl || !coolifyToken || !appId) {
-      throw new Error('Missing required environment variables');
-    }
+    // if (!coolifyUrl || !coolifyToken || !appId) {
+    //   throw new Error('Missing required environment variables');
+    // }
 
     const api = axios.create({
       baseURL: coolifyUrl,
