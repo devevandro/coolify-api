@@ -20,22 +20,22 @@ module.exports = async ({ github, context }) => {
       .filter(([key]) => !exclude.includes(key))
       .map(([key, value]) => ({
         key,
-        value
+        value,
       }));
 
     const api = axios.create({
       baseURL: coolifyUrl,
       headers: {
         Authorization: `Bearer ${coolifyToken}`,
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
 
     // 1. Atualizar as variáveis de ambiente (ENVs)
     if (secretsParsed.length > 0) {
       console.log("Updating environment variables...");
       const body = {
-        data: convertedJsonToArray
+        data: convertedJsonToArray,
       };
       const envUpdate = await api.patch(
         `/applications/${appUuid}/envs/bulk`,
@@ -51,19 +51,13 @@ module.exports = async ({ github, context }) => {
 
     // 2. Reiniciar a aplicação
     console.log("Restarting application...");
-    const { data, status } = await api.post(`/deploy?uuid=${appUuid}`);
-    const deploymentUuid = data.deployments[0].deployment_uuid;
+    const { status } = await api.post(`/deploy?uuid=${appUuid}`);
 
     if (status !== 200) {
       throw new Error("Failed to restart application");
     }
 
-    const response = await api.get(`/deployments/${deploymentUuid}`);
-
-    if (response.data.status === "finished") {
-      console.log("Deploy completed successfully!");
-    }
-
+    console.log("Deploy completed successfully!");
   } catch (error) {
     core.setFailed(`Deployment failed: ${error.message}`);
     throw error;
