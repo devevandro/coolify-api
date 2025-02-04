@@ -57,7 +57,7 @@ module.exports = async ({ github, context }) => {
       throw new Error("Failed to restart application");
     }
 
-    console.log(restart.deployments[0])
+    console.log(restart.deployments)
 
     // const { data } = await api.get(`/deployments/${restart.deployments[0].deployment_uuid}`);
 
