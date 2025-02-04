@@ -22,9 +22,9 @@ jobs:
       - name: GitHub Action - Deploy and Update ENVs on Coolify
         uses: devevandro/coolify-app-deploy@v0.0.1
         with:
-          coolify_url: ${{ secrets.COOLIFY_URL }}
-          coolify_token: ${{ secrets.COOLIFY_TOKEN }}
-          coolify_app_uuid: ${{ secrets.COOLIFY_APP_UUID }}
+          coolifyUrl: ${{ secrets.COOLIFY_URL }}
+          coolifyToken: ${{ secrets.COOLIFY_TOKEN }}
+          coolifyAppUuid: ${{ secrets.COOLIFY_APP_UUID }}
           secrets: ${{ toJson(secrets) }}
     # - uses: actions/checkout@v4
 
