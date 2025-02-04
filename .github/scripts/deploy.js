@@ -54,7 +54,7 @@ module.exports = async ({ github, context }) => {
     const { data } = await api.post(`/deploy?uuid=${appUuid}`);
     const deploymentUuid = data.deployments[0].deployment_uuid;
 
-    if (restart.status !== 200) {
+    if (data.status !== 200) {
       throw new Error("Failed to restart application");
     }
 
