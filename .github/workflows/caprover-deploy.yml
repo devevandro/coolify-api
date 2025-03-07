@@ -1,0 +1,26 @@
+name: Coolify Deploy
+
+on:
+  push:
+    branches: [stage]
+  workflow_dispatch:
+
+env:
+  SERVER: http://64.23.236.233:3000/
+  PASSWORD: capitain42
+  APPNAME: projeto-teste
+  PORT: 3030
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: stage
+    steps:
+      - name: CapRover Update App Env Vars
+        uses: devevandro/caprover-update-env-vars@0.0.0-beta
+        with:
+          server: ${{ env.SERVER }}
+          password: ${{ env.PASSWORD }}
+          appname: ${{ env.APPNAME }}
+          port: ${{ env.PORT }}
+          secrets: ${{ toJson(secrets) }}
