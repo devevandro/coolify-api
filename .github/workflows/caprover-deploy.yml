@@ -17,7 +17,7 @@ jobs:
     environment: stage
     steps:
       - name: CapRover Update App Env Vars
-        uses: devevandro/caprover-update-env-vars@0.0.0-beta
+        uses: devevandro/caprover-update-env-vars@0.0.1-beta
         with:
           server: ${{ env.SERVER }}
           password: ${{ env.PASSWORD }}
